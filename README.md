@@ -1,2 +1,2 @@
 # VueStudy
-Study vue
+Some Vue Demo
