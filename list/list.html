@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>unshift</title>
+</head>
+
+<body>
+    <script src="../vue/vue.js"></script>
+    <div id="app">
+        <input v-model="fruit" @keyup.enter="add"></input>
+        <button @click="add">添加</button>
+        <li style="list-style: none;" v-for="fruit in fruits" :key="fruit.id">
+            <span style="float: left; width: 160px;">{{fruit.name}}</span>
+            <button @click="removeFruit(fruit)">删除</button>
+            编辑<input v-model="editedFruit" @blur=" editFruit(fruit.id-1)">
+        </li>
+    </div>
+</body>
+<script>
+    let id = 4
+    const app = new Vue({
+        el: '#app',
+        data() {
+            return {
+                fruit: "",
+                fruits: [{ id: '1', name: 'banana' }, { id: '2', name: 'apple' }, { id: '3', name: 'orange' }],
+                editedFruit: "",
+            }
+        },
+        methods: {
+            add() {
+                if (!this.fruit) { return; }
+                this.fruits.push({
+                    id: id++,
+                    name: this.fruit
+                })
+                this.fruit = ""
+            },
+
+            removeFruit(fruit) {
+                const index = this.fruits.findIndex(x => x.id === fruit.id)
+                this.fruits.splice(index, 1)
+            },
+
+            editFruit(index) {
+                this.fruits[index].name = this.editedFruit
+                this.editedFruit = ""
+            },
+        },
+    })
+</script>
+
+</html>
