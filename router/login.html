@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+</head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/3.0.1/vue-router.js"></script>
+
+<body>
+    <div id="app">
+        <router-view></router-view>
+    </div>
+</body>
+<script>
+    const Login = {
+        template: `
+        <div style="text-align: center;position: relative; margin-top: 300px; font-size: 30px;">
+        账号<input v-model:value="username" type="text" @keyup.enter="login">
+        <div></div>
+        密码<input type="password" @keyup.enter="login">
+        <div></div>
+        <button style="font-size: 40px;" @click="login">登录</button>
+        </div>
+        `,
+        methods: {
+            login() {
+                var _username = this.username
+                this.$router.push({ path: '/user/' + _username })
+            }
+        },
+        data() {
+            return {
+                username: '',
+            }
+        },
+    }
+    const User = {
+        template: `<div>User {{ $route.params.id }} Welcome
+            <button @click="loginout">退出登录</button>
+            </div>
+        `,
+        data() {
+            return {
+                username: ''
+            }
+        },
+        methods: {
+            loginout() {
+                this.$router.push({ path: '/' })
+            }
+        },
+    }
+
+    const routes = [
+        { path: '/', component: Login },
+        { path: '/user/:id', component: User }
+    ]
+    const router = new VueRouter({
+        routes,
+    })
+    new Vue({
+        el: '#app',
+        router,
+        data() {
+            return {
+
+            }
+        },
+        methods: {
+
+        },
+    })
+</script>
+
+</html>
+<style>
+    body {
+        background: rgba(18, 204, 218, 0.527);
+    }
+</style>
