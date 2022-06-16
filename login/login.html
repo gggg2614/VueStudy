@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+</head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/3.0.1/vue-router.js"></script>
+
+<body>
+    <div id="app">
+        <router-view></router-view>
+    </div>
+</body>
+<script>
+    const Login = {
+        template: `
+        <div style="text-align: center;position: relative; margin-top: 300px; font-size: 30px;">
+        账号<input v-model:value="User.username" type="text" @keyup.enter="login">
+        <div></div>
+        密码<input type="password" v-model:value="User.password" @keyup.enter="login">
+        <div></div>
+        <button style="font-size: 40px;" @click="login">登录</button>
+        </div>
+        `,
+        methods: {
+            login() {
+                var _username = this.User.username
+                if (_username.length < 3) {
+                    window.alert('大于三位')
+                    return;
+                }
+                Authen = 1;
+                this.$router.push({ name: 'loginok', params: { username: _username } })
+            }
+        },
+        data() {
+            var Authen = 0
+            return {
+                User: { username: '123', password: '123' },
+            }
+        },
+
+    }
+    const ErrorPage = {
+        template: `
+            <div>
+               <a style="font-size:20px"> Don't do stupid things</a> 
+               <br>
+               <a style="color:red">we'll be back to homepage in 5 seconds...</a>
+            </div>
+        `,
+        methods: {
+            backhome() {
+                setTimeout(() => {
+                    this.$router.push('/')
+                    Authen = 0
+                }, 5000);
+            }
+        },
+        mounted() {
+            this.backhome()
+        }
+    }
+
+    const User = {
+        template: `<div>User {{ $route.params.username }} Welcome
+            <button @click="loginout">退出登录</button>
+            </div>
+        `,
+        data() {
+            return {
+                User: { username: '', password: '' },
+            }
+        },
+        methods: {
+            loginout() {
+                this.$router.push({ path: '/login' })
+                Authen = 0
+            }
+        },
+        beforeRouteUpdate(to, from) {
+            if (to.params.username !== from.params.username) {
+                this.$router.push('/err')
+                Authen = 0
+            }
+        }
+    }
+
+    const routes = [
+        { path: '/', redirect: '/login' },
+        {
+            name: 'login', path: '/login', component: Login,
+        },
+        { name: 'err', path: '/err', component: ErrorPage, },
+        {
+            name: 'loginok', path: '/user/:username', component: User,
+
+        }
+    ]
+
+    const router = new VueRouter({
+        routes,
+    })
+    //设置路由导航守卫
+    router.beforeEach((to, from, next) => {
+        if (to.path !== '/login' && !this.Authen) {
+            next({ path: '/login' })
+        }
+        else next()
+    })
+
+    new Vue({
+        el: '#app',
+        router,
+        data() {
+            return {
+            }
+        },
+        methods: {
+
+        },
+    })
+</script>
+
+</html>
+<style>
+    body {
+        background: rgba(18, 204, 218, 0.527);
+    }
+</style>
