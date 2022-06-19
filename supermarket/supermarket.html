@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>supermarket</title>
+</head>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/3.0.1/vue-router.js"></script>
+
+<body>
+    <div id="app">
+        <table border="1">
+            <template v-for="(good,index) in goods">
+                <thead>
+                    <tr>
+                        <th>商品编号</th>
+                        <th>商品姓名</th>
+                        <th>商品价格</th>
+                        <th>商品介绍</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>{{index+1}}</th>
+                        <th>{{good.name}}</th>
+                        <th>{{good.price}}</th>
+                        <th>{{good.intro}}</th>
+                        <th>
+                            <input type="button" value="添加购物车">
+                        </th>
+                    </tr>
+                </tbody>
+            </template>
+        </table>
+    </div>
+</body>
+<script>
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                goods: [
+                    { id: 1, name: '1', price: '1', intro: '1' },
+                    { id: 2, name: '2', price: '2', intro: '2' },
+                ]
+            }
+        },
+    })
+</script>
+
+</html>
