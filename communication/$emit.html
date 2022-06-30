@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="../vue.js"></script>
+
+<body>
+    <div id="app">
+        <input type="button" value="12" @click=emit>
+        <son @kailuo="kailuo1()"></son>
+        <son @kailuo="kailuo2()"></son>
+    </div>
+</body>
+<script>
+    const son = {
+        template: `
+        <div>
+            <input type="button" value="123" @click="$emit('kailuo')">
+        </div>
+        `,
+    }
+
+    var vm = new Vue({
+        el: '#app',
+        components: {
+            son
+        },
+        data() {
+            return {
+                book: 123
+            }
+        },
+        methods: {
+            emit() {
+                console.log(this.$emit);
+            },
+            kailuo1() {
+                console.log('开罗1号');
+            },
+            kailuo2() {
+                console.log('开罗2号');
+            }
+        },
+    })
+</script>
+
+</html>
