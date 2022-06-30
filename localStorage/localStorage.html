@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="count"></div>
+</body>
+
+<script>
+    var storage = window.localStorage;
+
+    var storage = window.localStorage;
+    if (!storage.getItem("pageLoadCount"))
+        storage.setItem("pageLoadCount", 0);
+    storage.pageLoadCount = parseInt(storage.getItem("pageLoadCount")) + 1;//必须格式转换
+    document.getElementById("count").innerHTML = storage.pageLoadCount;
+    showStorage();
+    function showStorage() {
+        for (var i = 0; i < storage.length; i++) {
+            //key(i)获得相应的键，再用getItem()方法获得对应的值
+            document.write(storage.key(i) + " : " + storage.getItem(storage.key(i)) + "<br>");
+        }
+    }
+</script>
+
+</html>

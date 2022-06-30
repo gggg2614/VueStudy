@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="../vue.js"></script>
+
+<body>
+    <div id="app">
+        <input type="text" v-model:value=books>
+        <child :book="books" :luo="luos"></child>
+    </div>
+</body>
+<script>
+    var child = {
+        props: {
+            book: [Array,Number,String],
+            luo: Object
+        },
+        template: `
+    <div id="child">
+        <span v-for="item in book">
+            {{item}}
+        </span>
+        <div v-for="item in book">
+            {{luo.luo}}开罗：{{luo.kailuo}}
+        </div>
+    </div>
+        `,
+    }
+    var vm = new Vue({
+        el: '#app',
+        components: {
+            child,
+        },
+        data() {
+            return {
+                books: [1, 2, 3, 4, 5],
+                luos: { luo: 1, kailuo: true }
+            }
+        },
+    })
+</script>
+
+</html>
