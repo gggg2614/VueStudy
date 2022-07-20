@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="../vue.js"></script>
+
+<body>
+    <div id="app">
+        <input type="button" value="click" @click="push">
+        <p>{{a}}</p>
+    </div>
+</body>
+<script>
+    const vm = new Vue({
+        el: '#app',
+        data() {
+            a = [1, 2, 3]
+            return {
+                a
+            }
+        },
+        methods: {
+            push() {
+                Vue.set(a, 0, 'sss')
+            }
+        },
+    })
+</script>
+
+</html>
