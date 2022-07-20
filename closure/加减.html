@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input id="add" type="button" value="+">
+    <input id="dec" type="button" value="-">
+    <input type="number" name="" id="counter" value="0">
+</body>
+<script>
+    var counter = document.getElementById('counter')
+    var Counter = (function () {
+        var privateCounter = 0;
+        function changeBy(val) {
+            privateCounter += val;
+        }
+        return {
+            increment: function () {
+                changeBy(1);
+            },
+            decrement: function () {
+                changeBy(-1);
+            },
+            value: function () {
+                return privateCounter;
+            }
+        }
+    })();
+    document.getElementById('add').addEventListener('click', function (e) {
+        counter.value = Counter.value() + 1
+    })
+    document.getElementById('dec').addEventListener('click', function (e) {
+        counter.value = Counter.value() - 1
+    })
+
+    document.getElementById('add').onclick = function name(params) {
+        Counter.increment()
+    }
+    document.getElementById('dec').onclick = function name(params) {
+        Counter.decrement()
+    }
+
+</script>
+
+</html>
