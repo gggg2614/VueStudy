@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>supermarket</title>
+</head>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/3.0.1/vue-router.js"></script>
+<script src="./lib/Shop.js"></script>
+<script src="./lib/Cart.js"></script>
+
+<body>
+    <div id="app">
+        <p id="nav">
+            <router-link to="/shop">shop</router-link>
+            <router-link to="/cart">cart</router-link>
+        </p>
+        <router-view></router-view>
+    </div>
+</body>
+<script>
+    const routes = [
+        { path: '/', redirect: '/shop' },
+        {
+            name: 'Shop', path: '/shop', component: Shop,
+        },
+        {
+            name: 'Cart', path: '/cart', component: Cart,
+        },
+
+
+    ]
+
+    const router = new VueRouter({
+        routes,
+    })
+
+    new Vue({
+        el: '#app',
+        router,
+
+    })
+</script>
+
+</html>
+<style>
+    #nav {
+        text-align: center;
+    }
+</style>

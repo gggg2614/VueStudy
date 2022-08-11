@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input id="btn" type="button" value="change">
+    <div id="app"></div>
+</body>
+<script>
+    var btn = document.getElementById('btn').addEventListener('click', function () {
+        var xhr = new XMLHttpRequest()
+        //设置请求行open()
+        xhr.open("POST", "https://api.vvhan.com/api/ian")
+        //发送请求
+        xhr.send()
+    
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    document.getElementById('app').innerHTML = xhr.response
+                    console.log(xhr);
+                }
+            }
+        }
+    })
+</script>
+
+</html>

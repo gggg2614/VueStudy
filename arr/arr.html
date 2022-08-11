@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src=".././vue.js"></script>
+
+<body>
+    <div id="app">
+        <input type="button" value="push" @click="pusharr">
+        <input type="button" value="pop" @click="poparr">
+        <input type="button" value="splice" @click="splicearr">
+        <input type="button" value="sort" @click="sortarr">
+        <p v-for="(a,index) in arr" :key="index">{{a}}--{{index}}</p>
+    </div>
+</body>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data() {
+            return {
+                arr: ['1', '2'],
+            }
+        },
+        methods: {
+            pusharr(index) {
+                a = 1
+                this.arr.push(this.arr[1]++)
+            },
+            poparr() {
+                this.arr.pop()
+            },
+            splicearr() {
+                this.arr.splice(0, 0, 12)
+            },
+            sortarr() {
+                this.arr.sort()
+            }
+        },
+    })
+</script>
+<script>
+console.log(1231);
+</script>
+
+</html>
